@@ -4,7 +4,9 @@
 # using your trackpoint.  You can find potential device names with xinput list.
 
 # It has to catch your movement while it's watching, so it won't disable in
-# a quick test. It helps a lot in my real life usage.
+# a quick test. It helps a lot in my real life usage. 
+
+# It's also probably bad for CPU usage.
 
 TRACKPOINT_DEV="TPPS/2 IBM TrackPoint"
 SLEEP_TIME=5
