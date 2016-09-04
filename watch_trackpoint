@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# This silly little script tries to disable your touchpad while you're
+# using your trackpoint.  You can find potential device names with xinput list.
+
+# It has to catch your movement while it's watching, so it won't disable in
+# a quick test. It helps a lot in my real life usage.
+
+TRACKPOINT_DEV="TPPS/2 IBM TrackPoint"
+SLEEP_TIME=5
+
+OLD_XY=0,0,
+while true; do
+  NEW_XY=`xinput query-state "$TRACKPOINT_DEV" |grep valu|awk 'BEGIN { FS = "=" } ; {print $2 ","}'|xargs`
+    if [ ! "$OLD_XY" = "$NEW_XY" ]; then
+      synclient TouchpadOff=1
+    else
+      synclient TouchpadOff=0
+    fi
+    sleep $SLEEP_TIME
+    OLD_XY="$NEW_XY"
+done
+
